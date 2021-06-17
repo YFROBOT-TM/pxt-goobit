@@ -17,7 +17,7 @@ let motorbitCustMotor1A = AnalogPin.P14
 let motorbitCustMotor2D = DigitalPin.P15
 let motorbitCustMotor2A = AnalogPin.P16
 
-//% color="#5698c3" weight=10 icon="\uf12e"
+//% color="#00e079" weight=10 icon="\uf192"
 namespace motorbitCust {
 
     /////////////////////// IR ///////////////////////
