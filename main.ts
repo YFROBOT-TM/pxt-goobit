@@ -1,6 +1,6 @@
 /** 
- * @file motorbitCust.ts
- * @brief Customize YFROBOT's motorbitCust makecode library.
+ * @file main.ts
+ * @brief YFROBOT's GooBit makecode library.
  * @n This is a MakeCode graphics programming extension 
  *    for MicroBit motor drive expansion board.
  * 
@@ -12,13 +12,13 @@
 */
 
 // motor pin 
-let motorbitCustMotor1D = DigitalPin.P13
-let motorbitCustMotor1A = AnalogPin.P14
-let motorbitCustMotor2D = DigitalPin.P15
-let motorbitCustMotor2A = AnalogPin.P16
+let GooBitMotor1D = DigitalPin.P13
+let GooBitMotor1A = AnalogPin.P14
+let GooBitMotor2D = DigitalPin.P15
+let GooBitMotor2A = AnalogPin.P16
 
 //% color="#00e079" weight=10 icon="\uf192"
-namespace motorbitCust {
+namespace GooBit {
 
     /////////////////////// IR ///////////////////////
     let irState: IrState
@@ -166,13 +166,13 @@ namespace motorbitCust {
     }
 
     /**
-     * Set the direction and speed of motorbitCust motor.
-     * @param index motor m1/m2/all. eg: motorbitCust.Motors.MAll
-     * @param direction direction to turn. eg: motorbitCust.Dir.CW
+     * Set the direction and speed of GooBit motor.
+     * @param index motor m1/m2/all. eg: GooBit.Motors.MAll
+     * @param direction direction to turn. eg: GooBit.Dir.CW
      * @param speed speed of motors (0 to 255). eg: 120
      */
     //% weight=90
-    //% blockId=motorbitCust_MotorRun block="motor|%index|move|%direction|at speed|%speed"
+    //% blockId=GooBit_MotorRun block="motor|%index|move|%direction|at speed|%speed"
     //% speed.min=0 speed.max=255
     //% index.fieldEditor="gridpicker" index.fieldOptions.columns=2
     //% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=2
@@ -184,25 +184,25 @@ namespace motorbitCust {
         speed = clamp(speed, 0, 255) * 4.01;  // 0~255 > 0~1023
 
         if (index == Motors.M1) {
-            pins.digitalWritePin(motorbitCustMotor1D, direction);
-            pins.analogWritePin(motorbitCustMotor1A, speed);
+            pins.digitalWritePin(GooBitMotor1D, direction);
+            pins.analogWritePin(GooBitMotor1A, speed);
         } else if (index == Motors.M2) {
-            pins.digitalWritePin(motorbitCustMotor2D, dir_m2);
-            pins.analogWritePin(motorbitCustMotor2A, speed);
+            pins.digitalWritePin(GooBitMotor2D, dir_m2);
+            pins.analogWritePin(GooBitMotor2A, speed);
         } else if (index == Motors.MAll) {
-            pins.digitalWritePin(motorbitCustMotor1D, direction);
-            pins.analogWritePin(motorbitCustMotor1A, speed);
-            pins.digitalWritePin(motorbitCustMotor2D, dir_m2);
-            pins.analogWritePin(motorbitCustMotor2A, speed);
+            pins.digitalWritePin(GooBitMotor1D, direction);
+            pins.analogWritePin(GooBitMotor1A, speed);
+            pins.digitalWritePin(GooBitMotor2D, dir_m2);
+            pins.analogWritePin(GooBitMotor2A, speed);
         }
     }
 
     /**
-     * Stop the motorbitCust motor.
-     * @param motor motor m1/m2/all. eg: motorbitCust.Motors.MAll
+     * Stop the GooBit motor.
+     * @param motor motor m1/m2/all. eg: GooBit.Motors.MAll
      */
     //% weight=89
-    //% blockId=motorbitCust_motorStop block="motor |%motor stop"
+    //% blockId=GooBit_motorStop block="motor |%motor stop"
     //% motor.fieldEditor="gridpicker" motor.fieldOptions.columns=2 
     export function motorStop(motor: Motors): void {
         motorRun(motor, 0, 0);
@@ -213,7 +213,7 @@ namespace motorbitCust {
      * @param speed the speed from 0 (min) to 255 (max), eg:128
      */
     //% weight=70
-    //% blockId=motorbitCust_forward block="move forward with speed %speed"
+    //% blockId=GooBit_forward block="move forward with speed %speed"
     //% speed.min=0 speed.max=255
     //% advanced=true
     export function forward(speed: number): void {
@@ -225,7 +225,7 @@ namespace motorbitCust {
      * @param speed the speed from 0 (min) to 255 (max), eg:128
      */
     //% weight=69
-    //% blockId=motorbitCust_back block="move back with speed %speed"
+    //% blockId=GooBit_back block="move back with speed %speed"
     //% speed.min=0 speed.max=255
     //% advanced=true
     export function back(speed: number): void {
@@ -237,7 +237,7 @@ namespace motorbitCust {
      * @param speed the speed from 0 (min) to 255 (max), eg:128
      */
     //% weight=65
-    //% blockId=motorbitCust_turnLeft block="turn left with speed %speed"
+    //% blockId=GooBit_turnLeft block="turn left with speed %speed"
     //% speed.min=0 speed.max=255
     //% advanced=true
     export function turnLeft(speed: number): void {
@@ -250,7 +250,7 @@ namespace motorbitCust {
      * @param speed the speed from 0 (min) to 255 (max), eg:128
      */
     //% weight=64
-    //% blockId=motorbitCust_turnRight block="turn right with speed %speed"
+    //% blockId=GooBit_turnRight block="turn right with speed %speed"
     //% speed.min=0 speed.max=255
     //% advanced=true
     export function turnRight(speed: number): void {
@@ -264,7 +264,7 @@ namespace motorbitCust {
      * @returns the Collision Switch Value.
      */
     //% weight=60
-    //% blockId=motorbitCust_readCollisionSwitch
+    //% blockId=GooBit_readCollisionSwitch
     //% block="Read Collision Switch on %pin"
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4 
     export function readCollisionSwitch(pin: DigitalPin): number {
@@ -277,7 +277,7 @@ namespace motorbitCust {
      * @returns the Left Patrol Sensor Value.
      */
     //% weight=59
-    //% blockId=motorbitCust_readLeftPatrolSensor
+    //% blockId=GooBit_readLeftPatrolSensor
     //% block="Read Left Patrol Sensor on %pin"
     //% pinl.fieldEditor="gridpicker" pinl.fieldOptions.columns=4 
     export function readLeftPatrolSensor(pinl: DigitalPin): number {
@@ -290,7 +290,7 @@ namespace motorbitCust {
      * @returns the Right Patrol Sensor Value.
      */
     //% weight=58
-    //% blockId=motorbitCust_readRightPatrolSensor
+    //% blockId=GooBit_readRightPatrolSensor
     //% block="Read Right Patrol Sensor on %pin"
     //% pinr.fieldEditor="gridpicker" pinr.fieldOptions.columns=4 
     export function readRightPatrolSensor(pinr: DigitalPin): number {
@@ -303,7 +303,7 @@ namespace motorbitCust {
      * @returns the X-axis Value.
      */
     //% weight=55
-    //% blockId=motorbitCust_readXRocker
+    //% blockId=GooBit_readXRocker
     //% block="Read Rocker X-axis on %pin"
     //% pinx.fieldEditor="gridpicker" pinx.fieldOptions.columns=4 
     export function readXRocker(pinx: AnalogPin): number {
@@ -316,7 +316,7 @@ namespace motorbitCust {
      * @returns the Y-axis Value.
      */
     //% weight=54
-    //% blockId=motorbitCust_readYRocker
+    //% blockId=GooBit_readYRocker
     //% block="Read Rocker Y-axis on %pin"
     //% piny.fieldEditor="gridpicker" piny.fieldOptions.columns=4 
     export function readYRocker(piny: AnalogPin): number {
@@ -331,7 +331,7 @@ namespace motorbitCust {
      * @param maxCmDistance maximum distance in centimeters (default is 450)
      */
     //% weight=50
-    //% blockId=motorbitCust_sonar_ping block="ping trig |%trig echo |%echo unit |%unit"
+    //% blockId=GooBit_sonar_ping block="ping trig |%trig echo |%echo unit |%unit"
     //% trig.fieldEditor="gridpicker" trig.fieldOptions.columns=4 
     //% echo.fieldEditor="gridpicker" echo.fieldOptions.columns=4 
     //% unit.fieldEditor="gridpicker" unit.fieldOptions.columns=3 
@@ -363,7 +363,7 @@ namespace motorbitCust {
      */
     //% subcategory="DigitalTube"
     //% weight=59
-    //% blockId="motorbitCust_4digitaltubes_pins"
+    //% blockId="GooBit_4digitaltubes_pins"
     //% block="connect 4 digital tubes at DIO %pin_d and CLK %pin_c"
     //% pin_c.fieldEditor="gridpicker" pin_c.fieldOptions.columns=4 pin_c.fieldOptions.tooltips="false"
     //% pin_d.fieldEditor="gridpicker" pin_d.fieldOptions.columns=4 pin_d.fieldOptions.tooltips="false"
@@ -468,7 +468,7 @@ namespace motorbitCust {
      * turn on display
      */
     //% subcategory="DigitalTube"
-    //% blockId="motorbitCust_TM650_ON" block="turn on display"
+    //% blockId="GooBit_TM650_ON" block="turn on display"
     //% weight=15 blockGap=8
     export function on() {
         cmd(_intensity * 16 + 1)
@@ -478,7 +478,7 @@ namespace motorbitCust {
      * turn off display
      */
     //% subcategory="DigitalTube"
-    //% blockId="motorbitCust_TM650_OFF" block="turn off display"
+    //% blockId="GooBit_TM650_OFF" block="turn off display"
     //% weight=10 blockGap=8
     export function off() {
         _intensity = 0
@@ -489,7 +489,7 @@ namespace motorbitCust {
      * clear display content
      */
     //% subcategory="DigitalTube"
-    //% blockId="motorbitCust_TM650_CLEAR" block="clear display"
+    //% blockId="GooBit_TM650_CLEAR" block="clear display"
     //% weight=5 blockGap=8
     export function clear() {
         dat(0, 0)
@@ -505,7 +505,7 @@ namespace motorbitCust {
      * @param bit is position, eg: 0
      */
     //% subcategory="DigitalTube"
-    //% blockId="motorbitCust_TM650_DIGIT" block="show digit %num|at %bit"
+    //% blockId="GooBit_TM650_DIGIT" block="show digit %num|at %bit"
     //% weight=40 blockGap=8
     //% num.max=15 num.min=0
     //% bit.max=3 bit.min=0
@@ -519,7 +519,7 @@ namespace motorbitCust {
      * @param num is number will be shown, eg: 100
      */
     //% subcategory="DigitalTube"
-    //% blockId="motorbitCust_TM650_SHOW_NUMBER" block="show number %num"
+    //% blockId="GooBit_TM650_SHOW_NUMBER" block="show number %num"
     //% weight=45 blockGap=8
     export function showNumber(num: number) {
         if (num < 0) {
@@ -538,7 +538,7 @@ namespace motorbitCust {
      * @param num is number will be shown, eg: 123
      */
     //% subcategory="DigitalTube"
-    //% blockId="motorbitCust_TM650_SHOW_HEX_NUMBER" block="show hex number %num"
+    //% blockId="GooBit_TM650_SHOW_HEX_NUMBER" block="show hex number %num"
     //% weight=43 blockGap=8
     export function showHex(num: number) {
         if (num < 0) {
@@ -558,7 +558,7 @@ namespace motorbitCust {
      * @param show is true/false, eg: true
      */
     //% subcategory="DigitalTube"
-    //% blockId="motorbitCust_TM650_SHOW_DP" block="at %bit|show dot point %show"
+    //% blockId="GooBit_TM650_SHOW_DP" block="at %bit|show dot point %show"
     //% weight=38 blockGap=8
     //% bit.max=3 bit.min=0
     export function showDpAt(bit: number, show: boolean) {
@@ -571,7 +571,7 @@ namespace motorbitCust {
      * @param dat is intensity of the display, eg: 3
      */
     //% subcategory="DigitalTube"
-    //% blockId="motorbitCust_TM650_INTENSITY" block="set intensity %dat"
+    //% blockId="GooBit_TM650_INTENSITY" block="set intensity %dat"
     //% weight=35 blockGap=8
     //% dat.max=7 dat.min=0
     export function setIntensity(dat: number) {
@@ -660,10 +660,10 @@ namespace motorbitCust {
     /**
      * Connects to the IR receiver module at the specified pin and configures the IR protocol.
      * @param pin IR receiver pin. eg: DigitalPin.P2
-     * @param protocol IR protocol. eg: motorbitCust.IrProtocol.NEC
+     * @param protocol IR protocol. eg: GooBit.IrProtocol.NEC
      */
     //% subcategory="IR Receiver"
-    //% blockId="makerbit_infrared_connect_receiver"
+    //% blockId="GooBit_infrared_connect_receiver"
     //% block="connect IR receiver at pin %pin and decode %protocol"
     //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=4
@@ -745,7 +745,7 @@ namespace motorbitCust {
      * @param handler body code to run when event is raised
      */
     //% subcategory="IR Receiver"
-    //% blockId=makerbit_infrared_on_ir_button
+    //% blockId=GooBit_infrared_on_ir_button
     //% block="on IR button | %button | %action"
     //% button.fieldEditor="gridpicker"
     //% button.fieldOptions.columns=3
@@ -768,7 +768,7 @@ namespace motorbitCust {
      * Returns the code of the IR button that was pressed last. Returns -1 (IrButton.Any) if no button has been pressed yet.
      */
     //% subcategory="IR Receiver"
-    //% blockId=makerbit_infrared_ir_button_pressed
+    //% blockId=GooBit_infrared_ir_button_pressed
     //% block="IR button"
     //% weight=10
     export function irButton(): number {
@@ -782,7 +782,7 @@ namespace motorbitCust {
      * Returns true if any button was pressed since the last call of this function. False otherwise.
      */
     //% subcategory="IR Receiver"
-    //% blockId=makerbit_infrared_was_any_button_pressed
+    //% blockId=GooBit_infrared_was_any_button_pressed
     //% block="any IR button was pressed"
     //% weight=7
     export function wasAnyIrButtonPressed(): boolean {
@@ -802,7 +802,7 @@ namespace motorbitCust {
      * @param button the button
      */
     //% subcategory="IR Receiver"
-    //% blockId=makerbit_infrared_button_code
+    //% blockId=GooBit_infrared_button_code
     //% button.fieldEditor="gridpicker"
     //% button.fieldOptions.columns=3
     //% button.fieldOptions.tooltips="false"

@@ -1,7 +1,7 @@
 {
-    "name": "motorbitCust",
+    "name": "GooBit",
     "version": "0.0.8",
-    "description": "Customize YFRobot motorbit MakeCode Extensions For Micro:bit",
+    "description": "YFRobot MakeCode Extensions For Micro:bit",
     "license": "MIT",
     "dependencies": {
         "core": "*",
@@ -10,10 +10,10 @@
     "files": [
         "main.ts",
         "README.md",
-        "_locales/zh-cn/motorbitCust-strings.json",
-        "_locales/zh-cn/motorbitCust-jsdoc-strings.json",
-        "_locales/zh-tw/motorbitCust-strings.json",
-        "_locales/zh-tw/motorbitCust-jsdoc-strings.json"
+        "_locales/zh-cn/GooBit-strings.json",
+        "_locales/zh-cn/GooBit-jsdoc-strings.json",
+        "_locales/zh-tw/GooBit-strings.json",
+        "_locales/zh-tw/GooBit-jsdoc-strings.json"
     ],
     "testFiles": [
         "test.ts"

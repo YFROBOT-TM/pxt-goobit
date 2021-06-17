@@ -1,5 +1,5 @@
-# motorbitCust
-Customize MotorBit extension for makecode -- From YFROBOT
+# GooBit
+ GooBit extension for makecode -- From YFROBOT
 Support Motorbit, digital tube display module, ultrasonic module, collision switch, cruise sensor, and rocker module. 支持 MotorBit、数码管显示模块、超声波模块、碰撞开关、巡线传感器、摇杆模块。
 
 [MotorBit is an easy-to-use motor drive expansion board for MicroBit](http://www.yfrobot.com.cn/wiki/index.php?title=Motor:Bit)
@@ -12,47 +12,47 @@ The Motor:Bit also features the “GVS” connectors, allowing for easy direct c
 
 ## Basic usage
 
-* Set the direction and speed of motorbitCust motor
+* Set the direction and speed of GooBit motor
 
 ```blocks
- motorbitCust.motorRun(motorbitCust.Motors.ML, motorbitCust.Dir.CW, 120)
- motorbitCust.motorRun(motorbitCust.Motors.MR, motorbitCust.Dir.CCW, 120)
+ GooBit.motorRun(GooBit.Motors.ML, GooBit.Dir.CW, 120)
+ GooBit.motorRun(GooBit.Motors.MR, GooBit.Dir.CCW, 120)
 ```
 
-* Stop the motorbitCust motor 
+* Stop the GooBit motor 
 
 ```blocks
-motorbitCust.motorStop(motorbitCust.Motors.ML)
+GooBit.motorStop(GooBit.Motors.ML)
 ```
 
 * Move forward
 
 ```blocks
-motorbitCust.forward(128)
+GooBit.forward(128)
 ```
 
 * Move back
 
 ```blocks
-motorbitCust.back(128)
+GooBit.back(128)
 ```
 
 * Turn left
 
 ```blocks
-motorbitCust.turnLeft(128)
+GooBit.turnLeft(128)
 ```
 
 * Turn right
 
 ```blocks
-motorbitCust.turnRight(128)
+GooBit.turnRight(128)
 ```
 
 * Read IR sensor value
 
 ```blocks
-basic.showNumber(motorbitCust.irButtonCode())
+basic.showNumber(GooBit.irButtonCode())
 ```
 
 
