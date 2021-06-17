@@ -1,0 +1,26 @@
+{
+    "name": "motorbitCust",
+    "version": "0.0.8",
+    "description": "Customize YFRobot motorbit MakeCode Extensions For Micro:bit",
+    "license": "MIT",
+    "dependencies": {
+        "core": "*",
+        "microphone": "*"
+    },
+    "files": [
+        "main.ts",
+        "README.md",
+        "_locales/zh-cn/motorbitCust-strings.json",
+        "_locales/zh-cn/motorbitCust-jsdoc-strings.json",
+        "_locales/zh-tw/motorbitCust-strings.json",
+        "_locales/zh-tw/motorbitCust-jsdoc-strings.json"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "public": true,
+    "supportedTargets": [
+        "microbit"
+    ],
+    "preferredEditor": "tsprj"
+}
