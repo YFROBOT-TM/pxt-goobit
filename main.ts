@@ -241,8 +241,8 @@ namespace GooBit {
     //% speed.min=0 speed.max=255
     //% advanced=true
     export function turnLeft(speed: number): void {
-        motorRun(Motors.M1, 0, 0);
-        motorRun(Motors.M2, 0, speed);
+        motorRun(Motors.M1, 0, speed);
+        motorRun(Motors.M2, 0, 0);
     }
 
     /**
@@ -254,8 +254,8 @@ namespace GooBit {
     //% speed.min=0 speed.max=255
     //% advanced=true
     export function turnRight(speed: number): void {
-        motorRun(Motors.M1, 0, speed);
-        motorRun(Motors.M2, 0, 0);
+        motorRun(Motors.M1, 0, 0);
+        motorRun(Motors.M2, 0, speed);
     }
 
     /**
@@ -658,13 +658,13 @@ namespace GooBit {
     }
 
     /**
-     * Connects to the IR receiver module at the specified pin and configures the IR protocol.
-     * @param pin IR receiver pin. eg: DigitalPin.P2
+     * Connects to the IR_Receiver module at the specified pin and configures the IR protocol.
+     * @param pin IR_Receiver pin. eg: DigitalPin.P2
      * @param protocol IR protocol. eg: GooBit.IrProtocol.NEC
      */
-    //% subcategory="IR Receiver"
+    //% subcategory="IR_Receiver"
     //% blockId="GooBit_infrared_connect_receiver"
-    //% block="connect IR receiver at pin %pin and decode %protocol"
+    //% block="connect IR_Receiver at pin %pin and decode %protocol"
     //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=4
     //% pin.fieldOptions.tooltips="false"
@@ -744,7 +744,7 @@ namespace GooBit {
      * @param action the trigger action
      * @param handler body code to run when event is raised
      */
-    //% subcategory="IR Receiver"
+    //% subcategory="IR_Receiver"
     //% blockId=GooBit_infrared_on_ir_button
     //% block="on IR button | %button | %action"
     //% button.fieldEditor="gridpicker"
@@ -767,7 +767,7 @@ namespace GooBit {
     /**
      * Returns the code of the IR button that was pressed last. Returns -1 (IrButton.Any) if no button has been pressed yet.
      */
-    //% subcategory="IR Receiver"
+    //% subcategory="IR_Receiver"
     //% blockId=GooBit_infrared_ir_button_pressed
     //% block="IR button"
     //% weight=10
@@ -781,7 +781,7 @@ namespace GooBit {
     /**
      * Returns true if any button was pressed since the last call of this function. False otherwise.
      */
-    //% subcategory="IR Receiver"
+    //% subcategory="IR_Receiver"
     //% blockId=GooBit_infrared_was_any_button_pressed
     //% block="any IR button was pressed"
     //% weight=7
@@ -801,7 +801,7 @@ namespace GooBit {
      * Returns the command code of a specific IR button.
      * @param button the button
      */
-    //% subcategory="IR Receiver"
+    //% subcategory="IR_Receiver"
     //% blockId=GooBit_infrared_button_code
     //% button.fieldEditor="gridpicker"
     //% button.fieldOptions.columns=3
