@@ -681,7 +681,7 @@ namespace GooBit {
      */
     //% subcategory="IR_Receiver"
     //% blockId="GooBit_infrared_connect_receiver"
-    //% block="connect IR_Receiver at pin %pin and decode %protocol"
+    //% block="connect IR_Receiver at pin %pin and decode NEC"
     //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=4
     //% pin.fieldOptions.tooltips="false"
