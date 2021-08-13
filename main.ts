@@ -16,6 +16,16 @@ let GooBitMotor1D = DigitalPin.P13
 let GooBitMotor1A = AnalogPin.P14
 let GooBitMotor2D = DigitalPin.P15
 let GooBitMotor2A = AnalogPin.P16
+// ultrasonic pin
+let GooBitUltrasonicTrig = DigitalPin.P8
+let GooBitUltrasonicEcho = DigitalPin.P9
+let distanceBuf = 0
+// patrol pin
+let GooBitPatrolENPin = DigitalPin.P12
+let GooBitPatrolLeft = DigitalPin.P0
+let GooBitPatrolMiddle = DigitalPin.P1
+let GooBitPatrolRight = DigitalPin.P2
+// rgbLED pin DigitalPin.P11
 
 //% color="#f8d86a" weight=10 icon="\uf192"
 namespace GooBit {
