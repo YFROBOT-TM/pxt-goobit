@@ -17,7 +17,7 @@ let GooBitMotor1A = AnalogPin.P14
 let GooBitMotor2D = DigitalPin.P15
 let GooBitMotor2A = AnalogPin.P16
 
-//% color="#00e079" weight=10 icon="\uf192"
+//% color="#f8d86a" weight=10 icon="\uf192"
 namespace GooBit {
 
     /////////////////////// IR ///////////////////////
@@ -325,8 +325,8 @@ namespace GooBit {
 
     /**
      * Send a ping and get the echo time (in microseconds) as a result
-     * @param trig trigger pin. eg: DigitalPin.P2
-     * @param echo echo pin. eg: DigitalPin.P8
+     * @param trig trigger pin. eg: DigitalPin.P8
+     * @param echo echo pin. eg: DigitalPin.P9
      * @param unit desired conversion unit. eg: PingUnit.Centimeters
      * @param maxCmDistance maximum distance in centimeters (default is 450)
      */
@@ -347,12 +347,19 @@ namespace GooBit {
 
         // read pulse
         const d = pins.pulseIn(echo, PulseValue.High, maxCmDistance * 58);
-
-        switch (unit) {
-            case PingUnit.Centimeters: return Math.idiv(d, 58);
-            case PingUnit.Inches: return Math.idiv(d, 148);
-            default: return d ;
+        let ret = d;
+        // filter timeout spikes
+        if (ret == 0 && distanceBuf != 0) {
+            ret = distanceBuf;
         }
+        distanceBuf = d;
+
+        return Math.floor(ret * 9 / 6 / 58);
+        // switch (unit) {
+        //     case PingUnit.Centimeters: return Math.idiv(d, 58);
+        //     case PingUnit.Inches: return Math.idiv(d, 148);
+        //     default: return d ;
+        // }
     }
 
     /////////////////////// DigitalTubes ///////////////////////
