@@ -159,7 +159,7 @@ namespace GooBit {
         //% blockId="patrolMiddle" block="middle"
         PatrolMiddle = 2,
         //% blockId="patrolRight" block="right"
-        PatrolRight = 8
+        PatrolRight = 3
     }
 
     /////////////////////// DigitalTubes ///////////////////////
@@ -229,7 +229,7 @@ namespace GooBit {
      * Move forward with speed.
      * @param speed the speed from 0 (min) to 255 (max), eg:128
      */
-    //% weight=70
+    //% weight=86
     //% blockId=GooBit_forward block="move forward with speed %speed"
     //% speed.min=0 speed.max=255
     //% advanced=true
@@ -241,7 +241,7 @@ namespace GooBit {
      * Move back with speed.
      * @param speed the speed from 0 (min) to 255 (max), eg:128
      */
-    //% weight=69
+    //% weight=85
     //% blockId=GooBit_back block="move back with speed %speed"
     //% speed.min=0 speed.max=255
     //% advanced=true
@@ -253,7 +253,7 @@ namespace GooBit {
      * Turn left with speed.
      * @param speed the speed from 0 (min) to 255 (max), eg:128
      */
-    //% weight=65
+    //% weight=84
     //% blockId=GooBit_turnLeft block="turn left with speed %speed"
     //% speed.min=0 speed.max=255
     //% advanced=true
@@ -266,7 +266,7 @@ namespace GooBit {
      * Turn right with speed.
      * @param speed the speed from 0 (min) to 255 (max), eg:128
      */
-    //% weight=64
+    //% weight=83
     //% blockId=GooBit_turnRight block="turn right with speed %speed"
     //% speed.min=0 speed.max=255
     //% advanced=true
@@ -276,87 +276,36 @@ namespace GooBit {
     }
 
     /**
+      * Enable or Disable line tracking sensor.
+      * @param enable line tracking sensor enable signal(0 or 1), eg: valon.PatrolEnable.PatrolOn
+      */
+    //% weight=79
+    //% blockId=GooBit_Patrol_enable block="%enable line tracking sensor"
+    //% patrol.fieldEditor="gridpicker" patrol.fieldOptions.columns=2 
+    export function enablePatrol(enable: PatrolEnable): void {
+        pins.digitalWritePin(GooBitPatrolENPin, enable);
+        pins.setPull(GooBitPatrolLeft, PinPullMode.PullNone)
+        pins.setPull(GooBitPatrolMiddle, PinPullMode.PullNone)
+        pins.setPull(GooBitPatrolRight, PinPullMode.PullNone)
+    }
+
+    /**
       * Read line tracking sensor.
       * @param patrol patrol sensor number.
       */
-    //% weight=60
+    //% weight=78
     //% blockId=GooBit_read_Patrol block="read %patrol line tracking sensor"
     //% patrol.fieldEditor="gridpicker" patrol.fieldOptions.columns=2 
     export function readPatrol(patrol: Patrol): number {
         if (patrol == Patrol.PatrolLeft) {
-            return pins.digitalReadPin(valonPatrolLeft)
+            return pins.digitalReadPin(GooBitPatrolLeft)
         } else if (patrol == Patrol.PatrolMiddle) {
-            return pins.digitalReadPin(valonPatrolMiddle)
+            return pins.digitalReadPin(GooBitPatrolMiddle)
         } else if (patrol == Patrol.PatrolRight) {
-            return pins.digitalReadPin(valonPatrolRight)
+            return pins.digitalReadPin(GooBitPatrolRight)
         } else {
             return -1
         }
-    }
-
-    /**
-     * Read the Collision Switch.
-     * @param pin collision Switch pin. eg: DigitalPin.P8
-     * @returns the Collision Switch Value.
-     */
-    //% weight=60
-    //% blockId=GooBit_readCollisionSwitch
-    //% block="Read Collision Switch on %pin"
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4 
-    export function readCollisionSwitch(pin: DigitalPin): number {
-        return pins.digitalReadPin(pin)
-    }
-
-    /**
-     * Read the Left Patrol Sensor.
-     * @param pinl the Left Patrol Sensor pin. eg: DigitalPin.P2
-     * @returns the Left Patrol Sensor Value.
-     */
-    //% weight=59
-    //% blockId=GooBit_readLeftPatrolSensor
-    //% block="Read Left Patrol Sensor on %pin"
-    //% pinl.fieldEditor="gridpicker" pinl.fieldOptions.columns=4 
-    export function readLeftPatrolSensor(pinl: DigitalPin): number {
-        return pins.digitalReadPin(pinl)
-    }
-
-    /**
-     * Read the Right Patrol Sensor.
-     * @param pinr the Right Patrol Sensor pin. eg: DigitalPin.P8
-     * @returns the Right Patrol Sensor Value.
-     */
-    //% weight=58
-    //% blockId=GooBit_readRightPatrolSensor
-    //% block="Read Right Patrol Sensor on %pin"
-    //% pinr.fieldEditor="gridpicker" pinr.fieldOptions.columns=4 
-    export function readRightPatrolSensor(pinr: DigitalPin): number {
-        return pins.digitalReadPin(pinr)
-    }
-
-    /**
-     * Read X-axis of the Rocker.
-     * @param pinx the X-axis pin. eg: AnalogPin.P1
-     * @returns the X-axis Value.
-     */
-    //% weight=55
-    //% blockId=GooBit_readXRocker
-    //% block="Read Rocker X-axis on %pin"
-    //% pinx.fieldEditor="gridpicker" pinx.fieldOptions.columns=4 
-    export function readXRocker(pinx: AnalogPin): number {
-        return pins.analogReadPin(pinx)
-    }
-
-    /**
-     * Read Y-axis of the Rocker.
-     * @param piny the Y-axis pin. eg: AnalogPin.P2
-     * @returns the Y-axis Value.
-     */
-    //% weight=54
-    //% blockId=GooBit_readYRocker
-    //% block="Read Rocker Y-axis on %pin"
-    //% piny.fieldEditor="gridpicker" piny.fieldOptions.columns=4 
-    export function readYRocker(piny: AnalogPin): number {
-        return pins.analogReadPin(piny)
     }
 
     /**
@@ -365,7 +314,7 @@ namespace GooBit {
      * @param echo echo pin. eg: DigitalPin.P9
      * @param maxCmDistance maximum distance in centimeters (default is 450)
      */
-    //% weight=50
+    //% weight=60
     //% blockId=GooBit_sonar_ping block="ping trig |%trig echo |%echo unit:cm"
     //% trig.fieldEditor="gridpicker" trig.fieldOptions.columns=4 
     //% echo.fieldEditor="gridpicker" echo.fieldOptions.columns=4 
