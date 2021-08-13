@@ -450,12 +450,12 @@ namespace GooBit {
      */
     //% subcategory="IR_Receiver"
     //% blockId="GooBit_infrared_connect_receiver"
-    //% block="connect IR_Receiver at pin %pin and decode NEC"
+    //% block="connect IR_Receiver at pin %pin and decode %protocol"
     //% pin.fieldEditor="gridpicker"
     //% pin.fieldOptions.columns=4
     //% pin.fieldOptions.tooltips="false"
     //% weight=15
-    export function connectIrReceiver(pin: DigitalPin, protocol: IrProtocol): void {
+    export function connectIrReceiver(pin: DigitalPin, protocol=IrProtocol.NEC): void {
         if (irState) {
             return;
         }

@@ -39,7 +39,7 @@
   "GooBit.Motors.M2|block": "M2",
   "GooBit.Motors.MAll|block": "全部",
   "GooBit.back|block": "以%speed的速度後退",
-  "GooBit.connectIrReceiver|block": "連接紅外接收到 %pin| 編碼格式：NEC",
+  "GooBit.connectIrReceiver|block": "連接紅外接收到 %pin| 編碼格式：%protocol",
   "GooBit.forward|block": "以%speed的速度前進",
   "GooBit.irButtonCode|block": "紅外按鍵%button|值",
   "GooBit.irButton|block": "紅外按鍵值",
