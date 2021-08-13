@@ -298,11 +298,11 @@ namespace GooBit {
     //% patrol.fieldEditor="gridpicker" patrol.fieldOptions.columns=2 
     export function readPatrol(patrol: Patrol): number {
         if (patrol == Patrol.PatrolLeft) {
-            return pins.digitalReadPin(GooBitPatrolLeft)
+            return pins.analogReadPin(GooBitPatrolLeft)
         } else if (patrol == Patrol.PatrolMiddle) {
-            return pins.digitalReadPin(GooBitPatrolMiddle)
+            return pins.analogReadPin(GooBitPatrolMiddle)
         } else if (patrol == Patrol.PatrolRight) {
-            return pins.digitalReadPin(GooBitPatrolRight)
+            return pins.analogReadPin(GooBitPatrolRight)
         } else {
             return -1
         }
