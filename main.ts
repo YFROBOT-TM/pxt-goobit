@@ -27,7 +27,7 @@ let GooBitPatrolMiddle = DigitalPin.P1
 let GooBitPatrolRight = DigitalPin.P2
 // rgbLED pin DigitalPin.P11
 
-//% color="#f8d86a" weight=10 icon="\uf192"
+//% color="#fcb70a" weight=10 icon="\uf192"
 namespace GooBit {
 
     /////////////////////// IR ///////////////////////
