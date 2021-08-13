@@ -31,7 +31,6 @@
   "GooBit.readYRocker": "读取摇杆的Y轴。",
   "GooBit.ping": "发送ping并获得回声时间结果（以微秒为单位）",
   "GooBit.ping|param|echo": "echo引脚",
-  "GooBit.ping|param|maxCmDistance": "最大距离单位cm(默认500)",
-  "GooBit.ping|param|trig": "trigger引脚",
-  "GooBit.ping|param|unit": "转换单位"
+  "GooBit.ping|param|maxCmDistance": "最大距离单位cm(默认450)",
+  "GooBit.ping|param|trig": "trigger引脚"
 }

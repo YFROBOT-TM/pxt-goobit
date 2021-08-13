@@ -146,13 +146,20 @@ namespace GooBit {
         CCW = 0x1
     }
 
-    export enum PingUnit {
-        //% block="μs"
-        MicroSeconds,
-        //% block="cm"
-        Centimeters,
-        //% block="inches"
-        Inches
+    export enum PatrolEnable {
+        //% blockId="PatrolOn" block="ON"
+        PatrolOn = 0x01,
+        //% blockId="PatrolOff" block="OFF"
+        PatrolOff = 0x00
+    }
+
+    export enum Patrol {
+        //% blockId="patrolLeft" block="left"
+        PatrolLeft = 1,
+        //% blockId="patrolMiddle" block="middle"
+        PatrolMiddle = 2,
+        //% blockId="patrolRight" block="right"
+        PatrolRight = 8
     }
 
     /////////////////////// DigitalTubes ///////////////////////
@@ -269,6 +276,25 @@ namespace GooBit {
     }
 
     /**
+      * Read line tracking sensor.
+      * @param patrol patrol sensor number.
+      */
+    //% weight=60
+    //% blockId=GooBit_read_Patrol block="read %patrol line tracking sensor"
+    //% patrol.fieldEditor="gridpicker" patrol.fieldOptions.columns=2 
+    export function readPatrol(patrol: Patrol): number {
+        if (patrol == Patrol.PatrolLeft) {
+            return pins.digitalReadPin(valonPatrolLeft)
+        } else if (patrol == Patrol.PatrolMiddle) {
+            return pins.digitalReadPin(valonPatrolMiddle)
+        } else if (patrol == Patrol.PatrolRight) {
+            return pins.digitalReadPin(valonPatrolRight)
+        } else {
+            return -1
+        }
+    }
+
+    /**
      * Read the Collision Switch.
      * @param pin collision Switch pin. eg: DigitalPin.P8
      * @returns the Collision Switch Value.
@@ -337,16 +363,14 @@ namespace GooBit {
      * Send a ping and get the echo time (in microseconds) as a result
      * @param trig trigger pin. eg: DigitalPin.P8
      * @param echo echo pin. eg: DigitalPin.P9
-     * @param unit desired conversion unit. eg: PingUnit.Centimeters
      * @param maxCmDistance maximum distance in centimeters (default is 450)
      */
     //% weight=50
-    //% blockId=GooBit_sonar_ping block="ping trig |%trig echo |%echo unit |%unit"
+    //% blockId=GooBit_sonar_ping block="ping trig |%trig echo |%echo unit:cm"
     //% trig.fieldEditor="gridpicker" trig.fieldOptions.columns=4 
     //% echo.fieldEditor="gridpicker" echo.fieldOptions.columns=4 
-    //% unit.fieldEditor="gridpicker" unit.fieldOptions.columns=3 
     //% inlineInputMode=inline
-    export function ping(trig: DigitalPin, echo: DigitalPin, unit: PingUnit, maxCmDistance = 450): number {
+    export function ping(trig: DigitalPin, echo: DigitalPin, maxCmDistance = 450): number {
         // send pulse
         pins.setPull(trig, PinPullMode.PullNone);
         pins.digitalWritePin(trig, 0);
