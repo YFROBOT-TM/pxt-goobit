@@ -19,7 +19,7 @@ let GooBitMotor2A = AnalogPin.P16
 // ultrasonic pin
 let GooBitUltrasonicTrig = DigitalPin.P8
 let GooBitUltrasonicEcho = DigitalPin.P9
-let distanceBuf = 0
+let GooBit_distanceBuf = 0
 // patrol pin
 let GooBitPatrolENPin = DigitalPin.P12
 let GooBitPatrolLeft = DigitalPin.P0
@@ -332,10 +332,10 @@ namespace GooBit {
         const d = pins.pulseIn(echo, PulseValue.High, maxCmDistance * 58);
         let ret = d;
         // filter timeout spikes
-        if (ret == 0 && distanceBuf != 0) {
-            ret = distanceBuf;
+        if (ret == 0 && GooBit_distanceBuf != 0) {
+            ret = GooBit_distanceBuf;
         }
-        distanceBuf = d;
+        GooBit_distanceBuf = d;
 
         return Math.floor(ret * 9 / 6 / 58);
         // switch (unit) {
