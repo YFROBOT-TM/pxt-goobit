@@ -197,19 +197,18 @@ namespace GooBit {
         if (index > 2 || index < 0)
             return
         
-        let dir_m2 = direction == Dir.CW ? Dir.CCW : Dir.CW;
         speed = clamp(speed, 0, 255) * 4.01;  // 0~255 > 0~1023
 
         if (index == Motors.M1) {
             pins.digitalWritePin(GooBitMotor1D, direction);
             pins.analogWritePin(GooBitMotor1A, speed);
         } else if (index == Motors.M2) {
-            pins.digitalWritePin(GooBitMotor2D, dir_m2);
+            pins.digitalWritePin(GooBitMotor2D, direction);
             pins.analogWritePin(GooBitMotor2A, speed);
         } else if (index == Motors.MAll) {
             pins.digitalWritePin(GooBitMotor1D, direction);
             pins.analogWritePin(GooBitMotor1A, speed);
-            pins.digitalWritePin(GooBitMotor2D, dir_m2);
+            pins.digitalWritePin(GooBitMotor2D, direction);
             pins.analogWritePin(GooBitMotor2A, speed);
         }
     }
