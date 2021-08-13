@@ -418,7 +418,7 @@ namespace GooBit {
 
     /**
      * Connects to the IR_Receiver module at the specified pin and configures the IR protocol.
-     * @param pin IR_Receiver pin. eg: DigitalPin.P2
+     * @param pin IR_Receiver pin. eg: DigitalPin.P5
      * @param protocol IR protocol. eg: GooBit.IrProtocol.NEC
      */
     //% subcategory="IR_Receiver"
