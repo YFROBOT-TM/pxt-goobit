@@ -12,10 +12,10 @@
 */
 
 // motor pin 
-let GooBitMotor1D = DigitalPin.P13
-let GooBitMotor1A = AnalogPin.P14
-let GooBitMotor2D = DigitalPin.P15
-let GooBitMotor2A = AnalogPin.P16
+let GooBitMotorADIR = DigitalPin.P13
+let GooBitMotorAPWM = AnalogPin.P14
+let GooBitMotorBDIR = DigitalPin.P15
+let GooBitMotorBPWM = AnalogPin.P16
 // ultrasonic pin
 let GooBitUltrasonicTrig = DigitalPin.P8
 let GooBitUltrasonicEcho = DigitalPin.P9
@@ -131,10 +131,10 @@ namespace GooBit {
     /////////////////////// IR ///////////////////////
 
     export enum Motors {
-        //% blockId="M1Motor" block="M1"
-        M1 = 0,
-        //% blockId="M2Motor" block="M2"
-        M2 = 1,
+        //% blockId="MRightMotor" block="MA"
+        MA = 0,
+        //% blockId="MLeftMotor" block="MB"
+        MB = 1,
         //% blockId="AllMotors" block="All"
         MAll = 2
     }
@@ -184,7 +184,7 @@ namespace GooBit {
 
     /**
      * Set the direction and speed of GooBit motor.
-     * @param index motor m1/m2/all. eg: GooBit.Motors.MAll
+     * @param index motor MA/MB/all. eg: GooBit.Motors.MAll
      * @param direction direction to turn. eg: GooBit.Dir.CW
      * @param speed speed of motors (0 to 255). eg: 120
      */
@@ -197,20 +197,20 @@ namespace GooBit {
         if (index > 2 || index < 0)
             return
 
-        let dir_m1 = direction == Dir.CW ? Dir.CCW : Dir.CW;
+        let dir_ma = direction == Dir.CW ? Dir.CCW : Dir.CW;
         speed = clamp(speed, 0, 255) * 4.01;  // 0~255 > 0~1023
 
-        if (index == Motors.M1) {
-            pins.digitalWritePin(GooBitMotor1D, dir_m1);
-            pins.analogWritePin(GooBitMotor1A, speed);
-        } else if (index == Motors.M2) {
-            pins.digitalWritePin(GooBitMotor2D, direction);
-            pins.analogWritePin(GooBitMotor2A, speed);
+        if (index == Motors.MA) {
+            pins.digitalWritePin(GooBitMotorADIR, dir_ma);
+            pins.analogWritePin(GooBitMotorAPWM, speed);
+        } else if (index == Motors.MB) {
+            pins.digitalWritePin(GooBitMotorBDIR, direction);
+            pins.analogWritePin(GooBitMotorBPWM, speed);
         } else if (index == Motors.MAll) {
-            pins.digitalWritePin(GooBitMotor1D, dir_m1);
-            pins.analogWritePin(GooBitMotor1A, speed);
-            pins.digitalWritePin(GooBitMotor2D, direction);
-            pins.analogWritePin(GooBitMotor2A, speed);
+            pins.digitalWritePin(GooBitMotorADIR, dir_ma);
+            pins.analogWritePin(GooBitMotorAPWM, speed);
+            pins.digitalWritePin(GooBitMotorBDIR, direction);
+            pins.analogWritePin(GooBitMotorBPWM, speed);
         }
     }
 
