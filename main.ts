@@ -167,11 +167,11 @@ namespace GooBit {
     }
 
     export enum TrackingState {
-        //% block="◉ ● ◉" enumval=0
+        //% block="○ ● ○" enumval=0
         M_line_LR_unknow,
-        //% block="◌ ◉ ●" enumval=1
+        //% block="◌ ○ ●" enumval=1
         L_unline_M_unknow_R_line,
-        //% block="● ◉ ◌" enumval=2
+        //% block="● ○ ◌" enumval=2
         L_line_M_unknow_R_unline,
         //% block="◌ ◌ ◌" enumval=3
         M_L_R_unline,
