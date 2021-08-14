@@ -51,7 +51,7 @@
   "GooBit.turnRight|block": "以%speed的速度右转",
   "GooBit.enablePatrol|block": "%enable 巡線傳感器",
   "GooBit.readPatrol|block": "巡線傳感器|%patrol",
-  "GooBit.ping|block": "超声波trig|%trig|echo|%echo|单位:cm",
+  "GooBit.ping|block": "超声波单位:cm",
   "GooBit.connectIrReceiver|block": "连接红外接收到 %pin| 编码格式：%protocol",
   "GooBit.onIrButton|block": "当红外按键 %button| %action",
   "GooBit.irButton|block": "红外按键值",
