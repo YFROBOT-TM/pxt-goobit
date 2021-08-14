@@ -20,11 +20,15 @@ let GooBitMotorBPWM = AnalogPin.P16
 let GooBitUltrasonicTrig = DigitalPin.P8
 let GooBitUltrasonicEcho = DigitalPin.P9
 let GooBit_distanceBuf = 0
-// patrol pin
-let GooBitPatrolENPin = DigitalPin.P12
-let GooBitPatrolLeft = AnalogPin.P0
-let GooBitPatrolMiddle = AnalogPin.P1
-let GooBitPatrolRight = AnalogPin.P2
+// track pin
+let GooBitTrackENPin = DigitalPin.P12
+let GooBitTrackLeft = AnalogPin.P0
+let GooBitTrackMiddle = AnalogPin.P1
+let GooBitTrackRight = AnalogPin.P2
+// Track sensor Threshold
+let GooBitDarkValveVal = 700;
+let GooBitLightValveVal = 300;
+
 // rgbLED pin DigitalPin.P11
 
 //% color="#fcb70a" weight=10 icon="\uf192"
@@ -146,20 +150,40 @@ namespace GooBit {
         CCW = 0x1
     }
 
-    export enum PatrolEnable {
-        //% blockId="PatrolOn" block="ON"
-        PatrolOn = 0x01,
-        //% blockId="PatrolOff" block="OFF"
-        PatrolOff = 0x00
+    export enum TrackEnable {
+        //% blockId="TrackOn" block="ON"
+        TrackOn = 0x01,
+        //% blockId="TrackOff" block="OFF"
+        TrackOff = 0x00
     }
 
-    export enum Patrol {
-        //% blockId="patrolLeft" block="left"
-        PatrolLeft = 1,
-        //% blockId="patrolMiddle" block="middle"
-        PatrolMiddle = 2,
-        //% blockId="patrolRight" block="right"
-        PatrolRight = 3
+    export enum Track {
+        //% blockId="TrackLeft" block="left"
+        TrackLeft = 1,
+        //% blockId="TrackMiddle" block="middle"
+        TrackMiddle = 2,
+        //% blockId="TrackRight" block="right"
+        TrackRight = 3
+    }
+
+    export enum TrackingState {
+        //% block="◉ ● ◉" enumval=0
+        M_line_LR_unknow,
+        //% block="◌ ◉ ●" enumval=1
+        L_unline_M_unknow_R_line,
+        //% block="● ◉ ◌" enumval=2
+        L_line_M_unknow_R_unline,
+        //% block="◌ ◌ ◌" enumval=3
+        M_L_R_unline,
+        //% block="● ● ●" enumval=4
+        M_L_R_line
+    }
+    /** Line Sensor events    MICROBIT_PIN_EVT_RISE **/
+    export enum MbEvents {
+        //% block="Found" 
+        FindLine = DAL.MICROBIT_PIN_EVT_FALL,
+        //% block="Lost" 
+        LoseLine = DAL.MICROBIT_PIN_EVT_RISE
     }
 
     /////////////////////// DigitalTubes ///////////////////////
@@ -276,32 +300,93 @@ namespace GooBit {
     }
 
     /**
-      * Enable or Disable line tracking sensor.
-      * @param enable line tracking sensor enable signal(0 or 1), eg: valon.PatrolEnable.PatrolOn
+      * Enable or Disable line tracking sensor and set the line tracking sensor valve value.
+      * @param enable line tracking sensor enable signal(0 or 1), eg: GooBit.TrackEnable.TrackOn
+      * @param lightValve  line tracking sensor light valve value(0 ~ 511), eg: 300
+      * @param darkValve line tracking sensor dark valve value(512 ~ 1023), eg: 700
       */
     //% weight=79
-    //% blockId=GooBit_Patrol_enable block="%enable line tracking sensor"
-    //% patrol.fieldEditor="gridpicker" patrol.fieldOptions.columns=2 
-    export function enablePatrol(enable: PatrolEnable): void {
-        pins.digitalWritePin(GooBitPatrolENPin, enable)
+    //% blockId=GooBit_enableTrack_setValveValue block="%enable line tracking sensor and set valve value light |%lightValve| dark |%darkValve|"
+    //% enable.fieldEditor="gridpicker" enable.fieldOptions.columns=2 
+    //% lightValve.min=0 lightValve.max=511
+    //% darkValve.min=512 darkValve.max=1023
+    //% inlineInputMode=inline
+    export function enableTrack_setValveValue(enable: TrackEnable, lightValve: number, darkValve: number): void {
+        pins.digitalWritePin(GooBitTrackENPin, enable)
+        GooBitLightValveVal = lightValve
+        GooBitDarkValveVal = darkValve
     }
 
     /**
       * Read line tracking sensor.
-      * @param patrol patrol sensor number.
+      * @param trackNum track sensor number.
       */
     //% weight=78
-    //% blockId=GooBit_read_Patrol block="read %patrol line tracking sensor"
-    //% patrol.fieldEditor="gridpicker" patrol.fieldOptions.columns=2 
-    export function readPatrol(patrol: Patrol): number {
-        if (patrol == Patrol.PatrolLeft) {
-            return pins.analogReadPin(GooBitPatrolLeft)
-        } else if (patrol == Patrol.PatrolMiddle) {
-            return pins.analogReadPin(GooBitPatrolMiddle)
-        } else if (patrol == Patrol.PatrolRight) {
-            return pins.analogReadPin(GooBitPatrolRight)
+    //% blockId=GooBit_readTrackSensor block="read %trackNum line tracking sensor"
+    //% trackNum.fieldEditor="gridpicker" trackNum.fieldOptions.columns=2 
+    export function readTrackSensor(trackNum: Track): number {
+        if (trackNum == Track.TrackLeft) {
+            return pins.analogReadPin(GooBitTrackLeft)
+        } else if (trackNum == Track.TrackMiddle) {
+            return pins.analogReadPin(GooBitTrackMiddle)
+        } else if (trackNum == Track.TrackRight) {
+            return pins.analogReadPin(GooBitTrackRight)
         } else {
             return -1
+        }
+    }
+
+    /**
+	* Judging the Current Status of Tracking Module. 
+	* @param state Five states of tracking module, eg: GooBit.TrackingState.M_line_LR_unknow
+    */
+    //% blockId=GooBit_tracking block="Tracking state is %state"
+    //% weight=76
+    export function tracking(state: TrackingState): boolean {
+        let left_tracking = readTrackSensor(Track.TrackLeft);
+        let middle_tracking = readTrackSensor(Track.TrackMiddle);
+        let right_tracking = readTrackSensor(Track.TrackRight);
+        if (left_tracking <= GooBitLightValveVal && middle_tracking >= GooBitDarkValveVal && right_tracking <= GooBitLightValveVal && state == 0) {
+            return true;
+        } else if (left_tracking <= GooBitLightValveVal && right_tracking >= GooBitDarkValveVal && state == 1) {
+            return true;
+        } else if (left_tracking >= GooBitDarkValveVal && right_tracking <= GooBitLightValveVal && state == 2) {
+            return true;
+        } else if (left_tracking <= GooBitLightValveVal && middle_tracking <= GooBitLightValveVal && right_tracking <= GooBitLightValveVal && state == 3) {
+            return true;
+        } else if (left_tracking >= GooBitDarkValveVal && middle_tracking >= GooBitDarkValveVal && right_tracking >= GooBitDarkValveVal && state == 4) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    /**
+    * track one side
+    * @param side Line sensor edge , eg: Track.TrackLeft
+    * @param state Line sensor status, eg: MbEvents.FindLine
+    */
+    //% blockId=GooBit_trackSide block="%side line sensor %state"
+    //% state.fieldEditor="gridpicker" state.fieldOptions.columns=2
+    //% side.fieldEditor="gridpicker" side.fieldOptions.columns=3
+    //% weight=74
+    export function trackSide(side: Track, state: MbEvents): boolean {
+        let left_tracking = readTrackSensor(Track.TrackLeft);
+        let middle_tracking = readTrackSensor(Track.TrackMiddle);
+        let right_tracking = readTrackSensor(Track.TrackRight);
+        if (side == Track.TrackLeft && state == 1 && left_tracking >= GooBitDarkValveVal) {
+            return true;
+        } else if (side == Track.TrackLeft && state == 0 && left_tracking <= GooBitLightValveVal) {
+            return true;
+        } else if (side == Track.TrackMiddle && state == 1 && middle_tracking >= GooBitDarkValveVal) {
+            return true;
+        } else if (side == Track.TrackMiddle && state == 0 && middle_tracking <= GooBitLightValveVal) {
+            return true;
+        } else if (side == Track.TrackRight && state == 1 && right_tracking >= GooBitDarkValveVal) {
+            return true;
+        } else if (side == Track.TrackRight && state == 0 && right_tracking <= GooBitLightValveVal) {
+            return true;
+        } else {
+            return false;
         }
     }
 
