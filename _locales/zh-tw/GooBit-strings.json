@@ -56,7 +56,7 @@
   "GooBit.back|block": "以%speed的速度後退",
   "GooBit.turnLeft|block": "以%speed的速度左轉",
   "GooBit.turnRight|block": "以%speed的速度右轉",
-  "GooBit.enableTrack_setValveValue|block": "%enable 巡線傳感器並設置閥值",
+  "GooBit.enableTrack_setValveValue|block": "%enable 巡線傳感器並設置閥值淺色|%lightValve|深色 |%darkValve|",
   "GooBit.readTrackSensor|block": "讀巡線傳感器|%trackNum",
   "GooBit.tracking|block": "巡線傳感器當前狀態為|%state",
   "GooBit.trackSide|block": "%side 巡線傳感器 %state 黑線",
