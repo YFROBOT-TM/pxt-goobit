@@ -185,6 +185,21 @@ namespace GooBit {
         //% block="Lost" 
         LoseLine = DAL.MICROBIT_PIN_EVT_RISE
     }
+    
+    export enum CarMoving {
+        //% blockId="TurnForward" block="Forward"
+        TForward = 0,
+        //% blockId="TurnBack" block="Back"
+        TBack = 1,
+        //% blockId="TurnLeft" block="Left"
+        TLeft = 2,
+        //% blockId="TurnRight" block="Right"
+        TRight = 3,
+        //% blockId="TurnLeftRotate" block="LeftRotate"
+        TLeftRotate = 4,
+        //% blockId="TurnRightRotate" block="RightRotate"
+        TRightRotate = 5,
+    }
 
     /////////////////////// DigitalTubes ///////////////////////
     let PINDIO = DigitalPin.P1;
@@ -248,7 +263,37 @@ namespace GooBit {
     export function motorStop(motor: Motors): void {
         motorRun(motor, 0, 0);
     }
-    
+
+    /**
+     * Move GooBit with speed.
+     * @param speed the speed from 0 (min) to 255 (max), eg:128
+     * @param dir move direction, eg: GooBit.CarMoving.TForward
+     */
+    //% weight=87
+    //% blockId=GooBit_Moving block="moving with speed %speed |%dir"
+    //% speed.min=0 speed.max=255
+    export function Moving(speed: number, dir:CarMoving): void {
+        if(dir == CarMoving.TForward){
+            motorRun(Motors.MAll, 0, speed);
+        } else if(dir == CarMoving.TBack){
+            motorRun(Motors.MAll, 1, speed);
+        } else if(dir == CarMoving.TLeft){
+            motorRun(Motors.MA, 0, speed);
+            motorRun(Motors.MB, 0, speed/2);
+        } else if(dir == CarMoving.TRight){
+            motorRun(Motors.MA, 0, speed/2);
+            motorRun(Motors.MB, 0, speed);
+        } else if(dir == CarMoving.TLeftRotate){
+            motorRun(Motors.MA, 0, speed);
+            motorRun(Motors.MB, 1, speed);
+        } else if(dir == CarMoving.TRightRotate){
+            motorRun(Motors.MA, 1, speed);
+            motorRun(Motors.MB, 0, speed);
+        } else{
+            // nothing
+        }
+    }
+
     /**
      * Move forward with speed.
      * @param speed the speed from 0 (min) to 255 (max), eg:128
