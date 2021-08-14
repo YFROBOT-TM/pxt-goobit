@@ -22,9 +22,9 @@ let GooBitUltrasonicEcho = DigitalPin.P9
 let GooBit_distanceBuf = 0
 // patrol pin
 let GooBitPatrolENPin = DigitalPin.P12
-let GooBitPatrolLeft = DigitalPin.P0
-let GooBitPatrolMiddle = DigitalPin.P1
-let GooBitPatrolRight = DigitalPin.P2
+let GooBitPatrolLeft = AnalogPin.P0
+let GooBitPatrolMiddle = AnalogPin.P1
+let GooBitPatrolRight = AnalogPin.P2
 // rgbLED pin DigitalPin.P11
 
 //% color="#fcb70a" weight=10 icon="\uf192"
@@ -258,8 +258,8 @@ namespace GooBit {
     //% speed.min=0 speed.max=255
     //% advanced=true
     export function turnLeft(speed: number): void {
-        motorRun(Motors.M1, 0, speed);
-        motorRun(Motors.M2, 0, 0);
+        motorRun(Motors.MA, 0, speed);
+        motorRun(Motors.MB, 0, 0);
     }
 
     /**
@@ -271,8 +271,8 @@ namespace GooBit {
     //% speed.min=0 speed.max=255
     //% advanced=true
     export function turnRight(speed: number): void {
-        motorRun(Motors.M1, 0, 0);
-        motorRun(Motors.M2, 0, speed);
+        motorRun(Motors.MA, 0, 0);
+        motorRun(Motors.MB, 0, speed);
     }
 
     /**
@@ -283,10 +283,7 @@ namespace GooBit {
     //% blockId=GooBit_Patrol_enable block="%enable line tracking sensor"
     //% patrol.fieldEditor="gridpicker" patrol.fieldOptions.columns=2 
     export function enablePatrol(enable: PatrolEnable): void {
-        pins.digitalWritePin(GooBitPatrolENPin, enable);
-        pins.setPull(GooBitPatrolLeft, PinPullMode.PullNone)
-        pins.setPull(GooBitPatrolMiddle, PinPullMode.PullNone)
-        pins.setPull(GooBitPatrolRight, PinPullMode.PullNone)
+        pins.digitalWritePin(GooBitPatrolENPin, enable)
     }
 
     /**
