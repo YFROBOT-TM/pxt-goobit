@@ -310,7 +310,7 @@ namespace GooBit {
      * @param maxCmDistance maximum distance in centimeters (default is 450)
      */
     //% weight=60
-    //% blockId=GooBit_sonar_ping block="ping unit:cm"
+    //% blockId=GooBit_sonar_ping block="Ultrasonic unit:cm"
     //% inlineInputMode=inline
     export function ping(maxCmDistance = 450): number {
         // send pulse
