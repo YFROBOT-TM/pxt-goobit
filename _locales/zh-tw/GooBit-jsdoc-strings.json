@@ -18,7 +18,7 @@
   "GooBit.enableTrack_setValveValue|param|lightValve": "巡線傳感器淺色閥值（範圍0~511），例如：300。",
   "GooBit.enableTrack_setValveValue|param|darkValve": "巡線傳感器深色閥值（範圍512~1023），例如：700。",
   "GooBit.readTrackSensor": "讀取巡線傳感器。",
-  "GooBit.readTrackSensor|param|patrol": "巡線傳感器編號。",
+  "GooBit.readTrackSensor|param|trackNum": "巡線傳感器編號。",
   "GooBit.tracking": "判斷巡線模塊部分當前狀態。",
   "GooBit.tracking|param|state": "巡線傳感器的5中狀態。",
   "GooBit.trackSide": "判斷巡線模塊中單個傳感器當前狀態。",

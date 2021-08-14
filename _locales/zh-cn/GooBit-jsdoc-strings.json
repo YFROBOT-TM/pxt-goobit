@@ -18,7 +18,7 @@
   "GooBit.enableTrack_setValveValue|param|lightValve": "巡线传感器浅色阀值（范围0~511），例如：300。",
   "GooBit.enableTrack_setValveValue|param|darkValve": "巡线传感器深色阀值（范围512~1023），例如：700。",
   "GooBit.readTrackSensor": "读取巡线传感器。",
-  "GooBit.readTrackSensor|param|patrol": "巡线传感器编号。",
+  "GooBit.readTrackSensor|param|trackNum": "巡线传感器编号。",
   "GooBit.tracking": "判断巡线模块部分当前状态。",
   "GooBit.tracking|param|state": "巡线传感器的5中状态。",
   "GooBit.trackSide": "判断巡线模块中单个传感器当前状态。",
