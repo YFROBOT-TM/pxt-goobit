@@ -342,13 +342,13 @@ namespace GooBit {
     */
     //% blockId=GooBit_tracking block="Tracking state is %state"
     //% state.fieldEditor="gridpicker" state.fieldOptions.columns=3
-    //% state.fieldOptions.tooltips="true"
+    //% state.fieldOptions.tooltips="false"
     //% weight=76
     export function tracking(state: TrackingState): boolean {
         let left_tracking = readTrackSensor(Track.TrackLeft);
         let middle_tracking = readTrackSensor(Track.TrackMiddle);
         let right_tracking = readTrackSensor(Track.TrackRight);
-        if (left_tracking <= GooBitLightValveVal && middle_tracking >= GooBitDarkValveVal && right_tracking <= GooBitLightValveVal && state == 0) {
+        if (middle_tracking >= GooBitDarkValveVal && state == 0) {
             return true;
         } else if (left_tracking <= GooBitLightValveVal && right_tracking >= GooBitDarkValveVal && state == 1) {
             return true;
