@@ -323,7 +323,7 @@ namespace GooBit {
       */
     //% weight=78
     //% blockId=GooBit_readTrackSensor block="read %trackNum line tracking sensor"
-    //% trackNum.fieldEditor="gridpicker" trackNum.fieldOptions.columns=2 
+    //% trackNum.fieldEditor="gridpicker" trackNum.fieldOptions.columns=3
     export function readTrackSensor(trackNum: Track): number {
         if (trackNum == Track.TrackLeft) {
             return pins.analogReadPin(GooBitTrackLeft)
