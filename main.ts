@@ -348,15 +348,15 @@ namespace GooBit {
         let left_tracking = readTrackSensor(Track.TrackLeft);
         let middle_tracking = readTrackSensor(Track.TrackMiddle);
         let right_tracking = readTrackSensor(Track.TrackRight);
-        if (middle_tracking >= GooBitDarkValveVal && state == 0) {
+        if (middle_tracking >= GooBitDarkValveVal && state == TrackingState.M_line_LR_unknow) {
             return true;
-        } else if (left_tracking <= GooBitLightValveVal && right_tracking >= GooBitDarkValveVal && state == 1) {
+        } else if (left_tracking <= GooBitLightValveVal && right_tracking >= GooBitDarkValveVal && state == TrackingState.L_unline_M_unknow_R_line) {
             return true;
-        } else if (left_tracking >= GooBitDarkValveVal && right_tracking <= GooBitLightValveVal && state == 2) {
+        } else if (left_tracking >= GooBitDarkValveVal && right_tracking <= GooBitLightValveVal && state == TrackingState.L_line_M_unknow_R_unline) {
             return true;
-        } else if (left_tracking <= GooBitLightValveVal && middle_tracking <= GooBitLightValveVal && right_tracking <= GooBitLightValveVal && state == 3) {
+        } else if (left_tracking <= GooBitLightValveVal && middle_tracking <= GooBitLightValveVal && right_tracking <= GooBitLightValveVal && state == TrackingState.M_L_R_unline) {
             return true;
-        } else if (left_tracking >= GooBitDarkValveVal && middle_tracking >= GooBitDarkValveVal && right_tracking >= GooBitDarkValveVal && state == 4) {
+        } else if (left_tracking >= GooBitDarkValveVal && middle_tracking >= GooBitDarkValveVal && right_tracking >= GooBitDarkValveVal && state == TrackingState.M_L_R_line) {
             return true;
         } else {
             return false;
