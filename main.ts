@@ -341,6 +341,8 @@ namespace GooBit {
 	* @param state Five states of tracking module, eg: GooBit.TrackingState.M_line_LR_unknow
     */
     //% blockId=GooBit_tracking block="Tracking state is %state"
+    //% state.fieldEditor="gridpicker" state.fieldOptions.columns=3
+    //% state.fieldOptions.tooltips="true"
     //% weight=76
     export function tracking(state: TrackingState): boolean {
         let left_tracking = readTrackSensor(Track.TrackLeft);
