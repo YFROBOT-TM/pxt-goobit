@@ -307,26 +307,22 @@ namespace GooBit {
 
     /**
      * Send a ping and get the echo time (in microseconds) as a result
-     * @param trig trigger pin. eg: DigitalPin.P8
-     * @param echo echo pin. eg: DigitalPin.P9
      * @param maxCmDistance maximum distance in centimeters (default is 450)
      */
     //% weight=60
-    //% blockId=GooBit_sonar_ping block="ping trig |%trig echo |%echo unit:cm"
-    //% trig.fieldEditor="gridpicker" trig.fieldOptions.columns=4 
-    //% echo.fieldEditor="gridpicker" echo.fieldOptions.columns=4 
+    //% blockId=GooBit_sonar_ping block="ping unit:cm"
     //% inlineInputMode=inline
-    export function ping(trig: DigitalPin, echo: DigitalPin, maxCmDistance = 450): number {
+    export function ping(maxCmDistance = 450): number {
         // send pulse
-        pins.setPull(trig, PinPullMode.PullNone);
-        pins.digitalWritePin(trig, 0);
+        pins.setPull(GooBitUltrasonicTrig, PinPullMode.PullNone);
+        pins.digitalWritePin(GooBitUltrasonicTrig, 0);
         control.waitMicros(2);
-        pins.digitalWritePin(trig, 1);
+        pins.digitalWritePin(GooBitUltrasonicTrig, 1);
         control.waitMicros(10);
-        pins.digitalWritePin(trig, 0);
+        pins.digitalWritePin(GooBitUltrasonicTrig, 0);
 
         // read pulse
-        let d = pins.pulseIn(echo, PulseValue.High, maxCmDistance * 58);
+        let d = pins.pulseIn(GooBitUltrasonicEcho, PulseValue.High, maxCmDistance * 58);
         let ret = d;
         // filter timeout spikes
         if (ret == 0 && GooBit_distanceBuf != 0) {
