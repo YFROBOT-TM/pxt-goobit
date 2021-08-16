@@ -295,56 +295,6 @@ namespace GooBit {
     }
 
     /**
-     * Move forward with speed.
-     * @param speed the speed from 0 (min) to 255 (max), eg:128
-     */
-    //% weight=86
-    //% blockId=GooBit_forward block="move forward with speed %speed"
-    //% speed.min=0 speed.max=255
-    //% advanced=true
-    export function forward(speed: number): void {
-        motorRun(Motors.MAll, 0, speed);
-    }
-
-    /**
-     * Move back with speed.
-     * @param speed the speed from 0 (min) to 255 (max), eg:128
-     */
-    //% weight=85
-    //% blockId=GooBit_back block="move back with speed %speed"
-    //% speed.min=0 speed.max=255
-    //% advanced=true
-    export function back(speed: number): void {
-        motorRun(Motors.MAll, 1, speed);
-    }
-
-    /**
-     * Turn left with speed.
-     * @param speed the speed from 0 (min) to 255 (max), eg:128
-     */
-    //% weight=84
-    //% blockId=GooBit_turnLeft block="turn left with speed %speed"
-    //% speed.min=0 speed.max=255
-    //% advanced=true
-    export function turnLeft(speed: number): void {
-        motorRun(Motors.MA, 0, speed);
-        motorRun(Motors.MB, 0, 0);
-    }
-
-    /**
-     * Turn right with speed.
-     * @param speed the speed from 0 (min) to 255 (max), eg:128
-     */
-    //% weight=83
-    //% blockId=GooBit_turnRight block="turn right with speed %speed"
-    //% speed.min=0 speed.max=255
-    //% advanced=true
-    export function turnRight(speed: number): void {
-        motorRun(Motors.MA, 0, 0);
-        motorRun(Motors.MB, 0, speed);
-    }
-
-    /**
       * Enable or Disable line tracking sensor and set the line tracking sensor valve value.
       * @param enable line tracking sensor enable signal(0 or 1), eg: GooBit.TrackEnable.TrackOn
       * @param lightValve  line tracking sensor light valve value(0 ~ 511), eg: 300
