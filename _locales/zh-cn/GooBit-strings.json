@@ -43,7 +43,7 @@
   "GooBit.Track.TrackLeft|block": "左侧",
   "GooBit.Track.TrackMiddle|block": "中间",
   "GooBit.Track.TrackRight|block": "右侧",
-  "GooBit.TrackingState.M_line_LR_unknow|block": "○ ● ○",
+  "GooBit.TrackingState.M_line_LR_unline|block": "◌ ● ◌",
   "GooBit.TrackingState.L_unline_M_unknow_R_line|block": "◌ ○ ●",
   "GooBit.TrackingState.L_line_M_unknow_R_unline|block": "● ○ ◌",
   "GooBit.TrackingState.M_L_R_unline|block": "◌ ◌ ◌",

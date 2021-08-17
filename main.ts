@@ -167,8 +167,8 @@ namespace GooBit {
     }
 
     export enum TrackingState {
-        //% block="○ ● ○" enumval=0
-        M_line_LR_unknow,
+        //% block="◌ ● ◌" enumval=0
+        M_line_LR_unline,
         //% block="◌ ○ ●" enumval=1
         L_unline_M_unknow_R_line,
         //% block="● ○ ◌" enumval=2
@@ -333,7 +333,7 @@ namespace GooBit {
 
     /**
 	* Judging the Current Status of Tracking Module. 
-	* @param state Five states of tracking module, eg: GooBit.TrackingState.M_line_LR_unknow
+	* @param state Five states of tracking module, eg: GooBit.TrackingState.M_line_LR_unline
     */
     //% blockId=GooBit_tracking block="Tracking state is %state"
     //% state.fieldEditor="gridpicker" state.fieldOptions.columns=3
@@ -343,7 +343,7 @@ namespace GooBit {
         let left_tracking = readTrackSensor(Track.TrackLeft);
         let middle_tracking = readTrackSensor(Track.TrackMiddle);
         let right_tracking = readTrackSensor(Track.TrackRight);
-        if (middle_tracking >= GooBitDarkValveVal && state == TrackingState.M_line_LR_unknow) {
+        if (left_tracking <= GooBitLightValveVal && middle_tracking >= GooBitDarkValveVal && right_tracking <= GooBitLightValveVal  && state == TrackingState.M_line_LR_unline) {
             return true;
         } else if (left_tracking <= GooBitLightValveVal && right_tracking >= GooBitDarkValveVal && state == TrackingState.L_unline_M_unknow_R_line) {
             return true;
