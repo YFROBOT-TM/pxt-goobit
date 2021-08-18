@@ -26,7 +26,7 @@ let GooBitTrackLeft = AnalogPin.P0
 let GooBitTrackMiddle = AnalogPin.P1
 let GooBitTrackRight = AnalogPin.P2
 // Track sensor Threshold
-let GooBitDarkValveVal = 700;
+let GooBitDarkValveVal = 600;
 let GooBitLightValveVal = 400;
 
 // rgbLED pin DigitalPin.P11
@@ -298,7 +298,7 @@ namespace GooBit {
       * Enable or Disable line tracking sensor and set the line tracking sensor valve value.
       * @param enable line tracking sensor enable signal(0 or 1), eg: GooBit.TrackEnable.TrackOn
       * @param lightValve  line tracking sensor light valve value(0 ~ 511), eg: 400
-      * @param darkValve line tracking sensor dark valve value(512 ~ 1023), eg: 700
+      * @param darkValve line tracking sensor dark valve value(512 ~ 1023), eg: 600
       */
     //% weight=79
     //% blockId=GooBit_enableTrack_setValveValue block="%enable line tracking sensor and set valve value light |%lightValve| dark |%darkValve|"
