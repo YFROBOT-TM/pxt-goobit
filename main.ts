@@ -395,6 +395,7 @@ namespace GooBit {
     //% blockId=GooBit_sonar_ping block="Ultrasonic unit:cm"
     //% inlineInputMode=inline
     export function ping(maxCmDistance = 450): number {
+        let d
         // send pulse
         pins.setPull(GooBitUltrasonicTrig, PinPullMode.PullNone);
         pins.digitalWritePin(GooBitUltrasonicTrig, 0);
@@ -404,15 +405,22 @@ namespace GooBit {
         pins.digitalWritePin(GooBitUltrasonicTrig, 0);
 
         // read pulse
-        let d = pins.pulseIn(GooBitUltrasonicEcho, PulseValue.High, maxCmDistance * 58);
-        let ret = d;
+        d = pins.pulseIn(GooBitUltrasonicEcho, PulseValue.High, maxCmDistance * 58);
+        // d = pins.pulseIn(GooBitUltrasonicEcho, PulseValue.High);
+        let distance_ult = d;
         // filter timeout spikes
-        if (ret == 0 && GooBit_distanceBuf != 0) {
-            ret = GooBit_distanceBuf;
+        if (distance_ult == 0 && GooBit_distanceBuf != 0) {
+            distance_ult = GooBit_distanceBuf;
         }
         GooBit_distanceBuf = d;
 
-        return Math.floor(ret * 9 / 6 / 58);
+        distance_ult = distance_ult * 0.0346 / 2
+        if (distance_ult <= 0 || 450 < distance_ult) {
+            distance_ult = 0
+        }
+        return distance_ult;
+
+        // return Math.floor(ret * 9 / 6 / 58);
         // switch (unit) {
         //     case PingUnit.Centimeters: return Math.idiv(d, 58);
         //     case PingUnit.Inches: return Math.idiv(d, 148);
