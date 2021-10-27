@@ -1,14 +1,10 @@
 # GooBit
  GooBit extension for makecode -- From YFROBOT
-Support Motorbit, digital tube display module, ultrasonic module, collision switch, cruise sensor, and rocker module. 支持 MotorBit、数码管显示模块、超声波模块、碰撞开关、巡线传感器、摇杆模块。
+Support Motorbit, integrated ultrasonic ranging, patrol line, infrared remote control, RGB led and other functions. 支持MotorBit，集成超声波测距、巡线行驶、红外遥控、彩灯等功能。
 
-[MotorBit is an easy-to-use motor drive expansion board for MicroBit](http://www.yfrobot.com.cn/wiki/index.php?title=Motor:Bit)
+[GooBit is an easy-to-use education robot kit for MicroBit](http://yfrobot.com.cn/wiki/index.php?title=GooBit%E5%B0%8F%E8%BD%A6%E5%A5%97%E4%BB%B6)
 
-[MotorBit To Buy](https://item.taobao.com/item.htm?id=620974170340)
-
-The YFROBOT Motor:Bit is an integrated motor driver and breakout board for the BBC micro:bit. With two integrated motor driver chip DRV8838, your micro:bit can drive two DC motors with 250mA max single channel current.
-
-The Motor:Bit also features the “GVS” connectors, allowing for easy direct connection to compatible “GVS” sensors and outputs. Among these connectors, P0, P1 support sensors with 3.3V power voltage only; P2, P8, support 3.3V or 5V sensors, You can change the output voltage by jumper caps on the board.
+[MotorBit To Buy](https://item.taobao.com/item.htm?id=655454133315)
 
 ## Basic usage
 
