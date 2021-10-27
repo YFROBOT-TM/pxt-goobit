@@ -418,13 +418,12 @@ namespace GooBit {
         if (distance_ult <= 0 || 450 < distance_ult) {
             distance_ult = 0
         }
-        return distance_ult;
+        return Math.round(distance_ult);
 
-        // return Math.floor(ret * 9 / 6 / 58);
         // switch (unit) {
-        //     case PingUnit.Centimeters: return Math.idiv(d, 58);
-        //     case PingUnit.Inches: return Math.idiv(d, 148);
-        //     default: return d ;
+        //     case PingUnit.Centimeters: return Math.round(distance_ult);
+        //     case PingUnit.Inches: return Math.idiv(distance_ult, 148);
+        //     default: return Math.idiv(distance_ult, 2.54);
         // }
     }
     
