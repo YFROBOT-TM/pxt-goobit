@@ -407,14 +407,14 @@ namespace GooBit {
         // read pulse
         d = pins.pulseIn(GooBitUltrasonicEcho, PulseValue.High, maxCmDistance * 58);
         // d = pins.pulseIn(GooBitUltrasonicEcho, PulseValue.High);
-        let distance_ult = d;
+        let distance_ult = 0;
         // filter timeout spikes
         if (distance_ult == 0 && GooBit_distanceBuf != 0) {
             distance_ult = GooBit_distanceBuf;
         }
         GooBit_distanceBuf = d;
 
-        distance_ult = distance_ult * 0.0346 / 2
+        distance_ult = d * 0.0346 / 2
         if (distance_ult <= 0 || 450 < distance_ult) {
             distance_ult = 0
         }
